@@ -1,1 +1,12 @@
-<h1>Familiar {{nombre}} creado exitosamente</h1>
+{% extends 'padre.html' %}
+
+{% block title %}Crear Familiar{% endblock %}
+
+{% block contenido %}
+  <h2 style="color:#2a4365; margin-bottom:20px;">Crear Familiar</h2>
+  <form method="post" style="max-width:400px; margin:auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 2px 8px #e2e8f0;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" style="background:#2b6cb0; color:white; border:none; padding:10px 20px; border-radius:5px; font-size:1rem; cursor:pointer; transition:background 0.2s;">Crear</button>
+  </form>
+{% endblock %}

@@ -1,4 +1,3 @@
-
 from django import forms
 
 class cursoForm(forms.Form):
@@ -23,3 +22,10 @@ class ProfesorForm(forms.Form):
     email = forms.EmailField(label='Email')
     especialidad = forms.CharField(max_length=100, label='Especialidad')
     curso = forms.CharField(max_length=100, label='Curso que dicta')
+
+class FamiliarForm(forms.Form):
+    nombre = forms.CharField(max_length=50, label='Nombre')
+    apellido = forms.CharField(max_length=50, label='Apellido')
+    edad = forms.IntegerField(min_value=0, label='Edad')
+    fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), label='Fecha de Nacimiento')
+    parentesco = forms.CharField(max_length=50, label='Parentesco')

@@ -2,8 +2,13 @@
 
 {% block title %} Crear Estudiante {% endblock %}
 
-
 {% block contenido %}
+
+{% if mensaje_exito %}
+  <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
+    {{ mensaje_exito }}
+  </div>
+{% endif %}
 
 <h2>Crear Estudiante</h2>
 

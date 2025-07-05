@@ -3,12 +3,21 @@
 {% block title %}Profesores{% endblock %}
 
 {% block contenido %}
-<h2>Profesores</h2>
-<ul>
+  <h2 style="color:#2a4365; margin-bottom:20px;">Profesores</h2>
+  {% if mensaje_exito %}
+    <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
+      {{ mensaje_exito }}
+    </div>
+  {% endif %}
+  <div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
+    <a href="{% url 'crear_profesor' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Profesor</a>
+    <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
+  </div>
+  <ul>
     {% for profesor in profesores %}
         <li>{{ profesor.nombre }} {{ profesor.apellido }} - {{ profesor.email }} - {{ profesor.especialidad }} - {{ profesor.curso }}</li>
     {% empty %}
         <li>No hay profesores registrados.</li>
     {% endfor %}
-</ul>
+  </ul>
 {% endblock %}

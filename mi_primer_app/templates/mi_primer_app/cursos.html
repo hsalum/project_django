@@ -2,8 +2,18 @@
 
 {% block title %} Cursos {% endblock %}
 
-
 {% block contenido %}
+
+{% if mensaje_exito %}
+  <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
+    {{ mensaje_exito }}
+  </div>
+{% endif %}
+
+<div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
+  <a href="{% url 'crear_curso' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Curso</a>
+  <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
+</div>
 
 <h2>Buscar Curso</h2>
 
@@ -21,6 +31,6 @@
         <li>No se encontraron cursos.</li>
     {% endfor %}
 
-<a href="{% url 'crear_curso' %}">Crear Curso</a>
+</ul>
 
 {% endblock %}

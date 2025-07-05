@@ -1,0 +1,28 @@
+{% extends 'padre.html' %}
+
+{% block title %}Familiares{% endblock %}
+
+{% block contenido %}
+  <h2 style="color:#2a4365; margin-bottom:20px;">Familiares</h2>
+  {% if mensaje_exito %}
+    <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
+      {{ mensaje_exito }}
+    </div>
+  {% endif %}
+  <div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
+    <a href="{% url 'crear_familiar' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Familiar</a>
+    <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
+  </div>
+  <ul style="list-style:none; padding:0; max-width:500px; margin:auto;">
+    {% for familiar in familiares %}
+      <li style="background:#edf2f7; margin-bottom:15px; padding:15px 20px; border-radius:8px; text-align:left;">
+        <strong>{{ familiar.nombre }} {{ familiar.apellido }}</strong><br>
+        Edad: {{ familiar.edad }}<br>
+        Fecha de nacimiento: {{ familiar.fecha_nacimiento }}<br>
+        Parentesco: {{ familiar.parentesco }}
+      </li>
+    {% empty %}
+      <li>No hay familiares registrados.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
