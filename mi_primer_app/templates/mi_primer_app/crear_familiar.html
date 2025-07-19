@@ -1,12 +1,80 @@
 {% extends 'padre.html' %}
 
-{% block title %}Crear Familiar{% endblock %}
+{% block title %}Crear {{ entidad }}{% endblock %}
 
 {% block contenido %}
-  <h2 style="color:#2a4365; margin-bottom:20px;">Crear Familiar</h2>
-  <form method="post" style="max-width:400px; margin:auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 2px 8px #e2e8f0;">
+<style>
+  body {
+    background: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2a4365;
+  }
+
+  .form-container {
+    max-width: 450px;
+    margin: 30px auto 60px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 35px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  .form-container p {
+    margin-bottom: 20px;
+  }
+
+  .form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .form-container button {
+    margin-top: 15px;
+    padding: 12px 28px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+
+  .form-container button:hover {
+    background: #e65c00;
+  }
+</style>
+
+<h2>Crear {{ entidad }}</h2>
+
+<div class="form-container">
+  <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" style="background:#2b6cb0; color:white; border:none; padding:10px 20px; border-radius:5px; font-size:1rem; cursor:pointer; transition:background 0.2s;">Crear</button>
+    <button type="submit">Crear</button>
   </form>
+</div>
+
 {% endblock %}

@@ -1,5 +1,105 @@
 {% extends "padre.html" %}
 
+{% block title %}Crear Estudiante{% endblock %}
+
+{% block contenido %}
+<style>
+  body {
+    background: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2a4365;
+  }
+
+  .mensaje-exito {
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin: 20px auto;
+    max-width: 500px;
+    font-weight: 500;
+  }
+
+  .form-container {
+    max-width: 500px;
+    margin: 30px auto 60px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  .form-container p {
+    margin-bottom: 20px;
+  }
+
+  .form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .form-container button {
+    margin-top: 10px;
+    padding: 10px 26px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+
+  .form-container button:hover {
+    background: #e65c00;
+  }
+</style>
+
+{% if mensaje_exito %}
+  <div class="mensaje-exito">
+    {{ mensaje_exito }}
+  </div>
+{% endif %}
+
+<h2>Crear Estudiante</h2>
+
+<div class="form-container">
+  <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Guardar</button>
+  </form>
+</div>
+
+{% endblock %}
+
+
+{%comment%}
+
+{% extends "padre.html" %}
+
 {% block title %} Crear Estudiante {% endblock %}
 
 {% block contenido %}
@@ -19,3 +119,5 @@
 </form>
 
 {% endblock %}
+
+{% endcomment %}

@@ -2,6 +2,146 @@
 
 {% block title %} Crear Curso {% endblock %}
 
+{% block contenido %}
+<style>
+  body {
+    background: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    margin-top: 50px;
+  }
+
+  .form-container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.85); /* blanco translúcido */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+
+  .form-container p {
+    margin-bottom: 20px;
+  }
+
+  .form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-container button {
+    margin-top: 10px;
+    padding: 10px 24px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .form-container button:hover {
+    background: #e65c00;
+  }
+
+  /* Estilo para el switch de "activo" */
+  .switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .switch-container input[type="checkbox"] {
+    width: 40px;
+    height: 20px;
+    appearance: none;
+    background: #ccc;
+    border-radius: 20px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .switch-container input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: 0.3s;
+  }
+
+  .switch-container input[type="checkbox"]:checked {
+    background: #ff6600;
+  }
+
+  .switch-container input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+  }
+</style>
+
+<h2>Crear Curso</h2>
+
+<div class="form-container">
+  <form method="POST">
+      {% csrf_token %}
+
+      {% for field in form %}
+          {% if field.name != 'activo' %}
+              <p>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                  <br><span style="color:red;">{{ field.errors.0 }}</span>
+                {% endif %}
+              </p>
+          {% endif %}
+      {% endfor %}
+
+
+      <div class="switch-container">
+        <label for="{{ form.activo.id_for_label }}">Activo</label>
+        {{ form.activo }}
+      </div>
+
+      <button type="submit">Guardar</button>
+  </form>
+</div>
+
+{% endblock %}
+
+
+
+
+
+{%comment%}
+
+{% extends "padre.html" %}
+
+{% block title %} Crear Curso {% endblock %}
+
 
 {% block contenido %}
 
@@ -14,3 +154,5 @@
 </form>
 
 {% endblock %}
+{% endcomment %}
+

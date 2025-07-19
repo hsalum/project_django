@@ -2,45 +2,166 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio</title>
-</head>
-<body style="margin:0; font-family:Arial, sans-serif; background:linear-gradient(to bottom right, #f0f4f8, #d9e2ec);">
+  <style>
+    /* Reset y tipografía */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fff8f0 0%, #f2f2f2 100%);
+      color: #333;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-  <header style="background-color:#2a4365; color:white; padding:20px 0; text-align:center;">
-    <h1 style="margin:0; font-size:2.5rem;">Bienvenido a Mi Sitio</h1>
-    <p style="margin:5px 0 0; font-size:1.2rem;">mi primer app</p>
+    header {
+      background-color: #ff6600;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(255, 102, 0, 0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      font-weight: 900;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    }
+    header p {
+      margin: 8px 0 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+      opacity: 0.9;
+      font-style: italic;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 50px auto 80px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    main h2 {
+      color: #ff6600;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    }
+    main p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #555555;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    main a.button {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 14px 36px;
+      background-color: #ff6600;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 6px 12px rgba(255,102,0,0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    main a.button:hover {
+      background-color: #e65c00;
+      box-shadow: 0 8px 20px rgba(230,92,0,0.6);
+    }
+
+    section#servicios {
+      background: white;
+      padding: 50px 20px 70px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      max-width: 900px;
+      margin: 0 auto 70px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    section#servicios h3 {
+      color: #222;
+      font-size: 2rem;
+      margin-bottom: 35px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+    }
+    .service-item {
+      background: #fff3e0;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 2px 10px rgba(255,102,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .service-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 18px rgba(255,102,0,0.35);
+    }
+    .service-item + .service-item {
+      margin-top: 25px;
+    }
+    .service-item h4 {
+      margin: 0 0 10px;
+      color: #ff6600;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .service-item p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    footer {
+      background-color: #222222;
+      color: #ddd;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bienvenido a Mi Sitio</h1>
+    <p>mi primer app</p>
   </header>
 
-  <main style="padding:40px 20px; max-width:800px; margin:auto; text-align:center;">
-    <h2 style="color:#2a4365; font-size:2rem; margin-bottom:20px;">Descubre lo que ofrecemos</h2>
-    <p style="font-size:1.1rem; line-height:1.6; color:#4a5568;">
-      Este es un sitio de ejemplo con un diseño minimalista y agradable.
-    </p>
-
-    <div style="margin-top:40px;">
-      <a href="#servicios" style="text-decoration:none; background-color:#3182ce; color:white; padding:12px 24px; border-radius:8px; font-size:1rem; display:inline-block;">
-        Ver Servicios
-      </a>
-    </div>
+  <main>
+    <h2>Descubre lo que ofrecemos</h2>
+    <p>Este es un sitio de ejemplo con un diseño moderno y vibrante usando una paleta naranja, blanco, gris y negro.</p>
+    <a href="#servicios" class="button">Ver Servicios</a>
   </main>
 
-  <section id="servicios" style="background-color:white; padding:40px 20px; text-align:center;">
-    <h3 style="font-size:1.8rem; color:#2a4365; margin-bottom:20px;">Nuestros Servicios</h3>
-    <div style="display:flex; flex-direction:column; gap:20px; max-width:800px; margin:auto;">
-      <div style="background:#edf2f7; padding:20px; border-radius:10px;">
-        <h4 style="margin-top:0; color:#2b6cb0;">Diseño Web</h4>
-        <p style="margin:0;">Creamos sitios atractivos y funcionales para tu negocio o proyecto.</p>
-      </div>
-      <div style="background:#edf2f7; padding:20px; border-radius:10px;">
-        <h4 style="margin-top:0; color:#2b6cb0;">Consultoría</h4>
-        <p style="margin:0;">Te ayudamos a definir tu estrategia digital y a mejorar tu presencia online.</p>
-      </div>
+  <section id="servicios">
+    <h3>Nuestros Servicios</h3>
+    <div class="service-item">
+      <h4>Diseño Web</h4>
+      <p>Creamos sitios atractivos y funcionales para tu negocio o proyecto.</p>
+    </div>
+    <div class="service-item">
+      <h4>Consultoría</h4>
+      <p>Te ayudamos a definir tu estrategia digital y a mejorar tu presencia online.</p>
     </div>
   </section>
 
-  <footer style="background-color:#2a4365; color:white; text-align:center; padding:20px 10px;">
-    <p style="margin:0;">&copy; 2025 Mi Sitio Web - Todos los derechos reservados.</p>
+  <footer>
+    <p>&copy; 2025 Mi Sitio Web - Todos los derechos reservados.</p>
   </footer>
 
 </body>

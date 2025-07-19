@@ -3,6 +3,147 @@
 {% block title %} Cursos {% endblock %}
 
 {% block contenido %}
+<style>
+  body {
+    background: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mensaje-exito {
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin: 30px auto 20px;
+    max-width: 500px;
+    font-weight: 500;
+  }
+
+  #cursos-section {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 50px 0 40px;
+  }
+
+  .btn {
+    padding: 12px 26px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+    font-weight: bold;
+  }
+
+  .btn-crear {
+    background: #ff6600; /* Naranja más vibrante */
+    color: white;
+  }
+
+  .btn-crear:hover {
+    background: #e65c00;
+  }
+
+  .btn-inicio {
+    background: #4a5568;
+    color: white;
+  }
+
+  .btn-inicio:hover {
+    background: #2d3748;
+  }
+
+  form {
+    margin: 20px auto;
+  }
+
+  input[type="text"] {
+    padding: 8px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button[type="submit"] {
+    padding: 8px 16px;
+    background: #2d3748;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .cursos-listado {
+    max-width: 600px;
+    margin: 30px auto;
+    background: rgba(255, 255, 255, 0.85); /* blanco translúcido */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin: 8px 0;
+    font-size: 1.1rem;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+</style>
+
+{% if mensaje_exito %}
+  <div class="mensaje-exito">
+    {{ mensaje_exito }}
+  </div>
+{% endif %}
+
+<div id="cursos-section">
+  <a href="{% url 'crear_curso' %}" class="btn btn-crear">Crear Curso</a>
+  <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
+</div>
+
+<h2>Buscar Curso</h2>
+
+<form method="GET" action="{% url 'buscar_cursos' %}">
+    <input type="text" name="nombre" placeholder="Nombre del curso" value="{{ nombre }}" />
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Cursos:</h2>
+
+<div class="cursos-listado">
+  <ul>
+      {% for curso in cursos %}
+          <li>{{ curso.nombre }}</li>
+      {% empty %}
+          <li>No se encontraron cursos.</li>
+      {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
+
+
+
+{%comment%}
+
+### CODIGO VIEJO
+{% extends "padre.html" %}
+
+{% block title %} Cursos {% endblock %}
+
+{% block contenido %}
 
 {% if mensaje_exito %}
   <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
@@ -10,7 +151,7 @@
   </div>
 {% endif %}
 
-<div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
+<div id="cursos-section" style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
   <a href="{% url 'crear_curso' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Curso</a>
   <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
 </div>
@@ -34,3 +175,5 @@
 </ul>
 
 {% endblock %}
+{% endcomment %}
+

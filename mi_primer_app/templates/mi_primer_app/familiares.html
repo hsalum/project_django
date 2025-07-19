@@ -3,26 +3,142 @@
 {% block title %}Familiares{% endblock %}
 
 {% block contenido %}
-  <h2 style="color:#2a4365; margin-bottom:20px;">Familiares</h2>
-  {% if mensaje_exito %}
-    <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
-      {{ mensaje_exito }}
-    </div>
-  {% endif %}
-  <div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
-    <a href="{% url 'crear_familiar' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Familiar</a>
-    <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
+<style>
+  body {
+    background: white;
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2a4365;
+  }
+
+  .mensaje-exito {
+    background: #c6f6d5;
+    color: #22543d;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin: 20px auto;
+    max-width: 500px;
+    font-weight: 500;
+  }
+
+  .btn-section {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+    font-weight: bold;
+  }
+
+  .btn-crear {
+    background: #ff6600;
+    color: white;
+  }
+
+  .btn-crear:hover {
+    background: #e65c00;
+  }
+
+  .btn-inicio {
+    background: #4a5568;
+    color: white;
+  }
+
+  .btn-inicio:hover {
+    background: #2d3748;
+  }
+
+  .tabla-contenedor {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f7fafc;
+    color: #2d3748;
+    font-weight: bold;
+  }
+
+  tr:hover {
+    background-color: #f0f0f0;
+  }
+
+  .no-registros {
+    text-align: center;
+    padding: 20px;
+    color: #718096;
+  }
+</style>
+
+<h2>Familiares</h2>
+
+{% if mensaje_exito %}
+  <div class="mensaje-exito">
+    {{ mensaje_exito }}
   </div>
-  <ul style="list-style:none; padding:0; max-width:500px; margin:auto;">
-    {% for familiar in familiares %}
-      <li style="background:#edf2f7; margin-bottom:15px; padding:15px 20px; border-radius:8px; text-align:left;">
-        <strong>{{ familiar.nombre }} {{ familiar.apellido }}</strong><br>
-        Edad: {{ familiar.edad }}<br>
-        Fecha de nacimiento: {{ familiar.fecha_nacimiento }}<br>
-        Parentesco: {{ familiar.parentesco }}
-      </li>
-    {% empty %}
-      <li>No hay familiares registrados.</li>
-    {% endfor %}
-  </ul>
+{% endif %}
+
+<div class="btn-section">
+  <a href="{% url 'crear_familiar' %}" class="btn btn-crear">Crear Familiar</a>
+  <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
+</div>
+
+<div class="tabla-contenedor">
+  {% if familiares %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre y Apellido</th>
+          <th>Edad</th>
+          <th>Fecha de nacimiento</th>
+          <th>Parentesco</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for familiar in familiares %}
+          <tr>
+            <td>{{ familiar.nombre }} {{ familiar.apellido }}</td>
+            <td>{{ familiar.edad }}</td>
+            <td>{{ familiar.fecha_nacimiento }}</td>
+            <td>{{ familiar.parentesco }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="no-registros">No hay familiares registrados.</div>
+  {% endif %}
+</div>
+
 {% endblock %}
