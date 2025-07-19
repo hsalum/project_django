@@ -45,3 +45,14 @@ class Profesor(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} - {self.curso}"
+
+
+class Computadora(models.Model):
+    marca = models.CharField(max_length=50)
+    modelo = models.CharField(max_length=50)
+    descripcion = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.marca} {self.modelo} - {self.descripcion if self.descripcion else 'Sin descripción'}"
+    
+  

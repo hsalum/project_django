@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
+
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+
 from django.http import HttpResponse
-from .models import Familia, Curso, Estudiante, Profesor
-from .forms import cursoForm, EstudianteForms, ProfesorForm, FamiliarForm
+
+from .models import Familia, Curso, Estudiante, Profesor, Computadora
+
+from .forms import cursoForm, EstudianteForms, ProfesorForm, FamiliarForm, ComputadoraForm
 
 
 def profesores(request):
@@ -111,3 +117,34 @@ def estudiantes(request):
     estudiantes = Estudiante.objects.all()
     mensaje_exito = request.session.pop('mensaje_exito', None)
     return render(request, 'mi_primer_app/estudiantes.html', {'estudiantes': estudiantes, 'mensaje_exito': mensaje_exito})
+
+class ComputadoraListView(ListView):
+    model = Computadora
+    template_name = 'mi_primer_app/computadoras.html'
+    context_object_name = 'computadoras'
+
+class ComputadoraDetailView(DetailView):
+    model = Computadora
+    template_name = 'mi_primer_app/detalle_computadora.html'
+    context_object_name = 'computadora'
+    
+    
+class ComputadoraCreateView(CreateView):
+    model = Computadora
+    form_class = ComputadoraForm
+    template_name = 'mi_primer_app/crear_computadora.html'
+    success_url = reverse_lazy('computadoras') 
+
+class ComputadoraUpdateView(UpdateView): 
+    model = Computadora
+    form_class = ComputadoraForm
+    template_name = 'mi_primer_app/actualizar_computadora.html'
+    success_url = reverse_lazy('computadoras')
+
+class ComputadoraDeleteView(DeleteView):
+    model = Computadora
+    template_name = 'mi_primer_app/eliminar_computadora.html'
+    success_url = reverse_lazy('computadoras')
+    
+    
+

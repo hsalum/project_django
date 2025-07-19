@@ -1,0 +1,175 @@
+{% extends "padre.html" %}
+
+{% block contenido %}
+<style>
+  .tabla-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+  }
+
+  .tabla-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2a4365;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    table-layout: fixed; /* Para distribuir mejor el ancho */
+  }
+
+  thead {
+    background-color: #f2f2f2;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top; /* Texto arriba */
+    word-break: break-word; /* Rompe texto largo */
+  }
+
+  th.modelo, td.modelo {
+    width: 20%; /* Ancho fijo para modelo */
+  }
+
+  th.descripcion, td.descripcion {
+    width: 40%; /* Ancho fijo para descripción */
+  }
+
+  td.acciones {
+    width: 20%; /* Espacio para botones */
+    padding-left: 10px;
+    white-space: nowrap; /* Evita que botones se corten */
+  }
+
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .no-data {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px 0;
+  }
+
+  .acciones a {
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: white;
+    transition: background 0.3s;
+  }
+
+  .acciones a.ver {
+    background-color: #3182ce; /* azul */
+  }
+
+  .acciones a.ver:hover {
+    background-color: #2b6cb0;
+  }
+
+  .acciones a.editar {
+    background-color: #f6ad55; /* naranja claro */
+    color: #222;
+  }
+
+  .acciones a.editar:hover {
+    background-color: #dd6b20;
+    color: white;
+  }
+
+  .acciones a.eliminar {
+    background-color: #e53e3e; /* rojo */
+  }
+
+  .acciones a.eliminar:hover {
+    background-color: #c53030;
+  }
+
+  /* Botones arriba */
+  .top-buttons {
+    max-width: 1000px;
+    margin: 30px auto 10px;
+    text-align: right;
+    font-family: sans-serif;
+  }
+
+  .top-buttons a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .top-buttons a.crear {
+    background-color: #ff6600;
+    color: white;
+  }
+
+  .top-buttons a.crear:hover {
+    background-color: #e65c00;
+  }
+
+  .top-buttons a.inicio {
+    background-color: #ccc;
+    color: #333;
+  }
+
+  .top-buttons a.inicio:hover {
+    background-color: #bbb;
+  }
+</style>
+
+<div class="top-buttons">
+  <a href="{% url 'crear-computadora' %}" class="crear">Crear Computadora</a>
+  <a href="{% url 'inicio' %}" class="inicio">Inicio</a>
+</div>
+
+<div class="tabla-container">
+  <h2>Lista de Computadoras</h2>
+
+  {% if computadoras %}
+    <table>
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th class="modelo">Modelo</th>
+          <th class="descripcion">Descripción</th>
+          <th class="acciones">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for computadora in computadoras %}
+          <tr>
+            <td>{{ computadora.marca }}</td>
+            <td class="modelo">{{ computadora.modelo }}</td>
+            <td class="descripcion">{{ computadora.descripcion }}</td>
+            <td class="acciones">
+              <a href="{% url 'detalle-computadora' computadora.pk %}" class="ver" title="Ver Detalle">🔍</a>
+              <a href="{% url 'editar-computadora' computadora.pk %}" class="editar" title="Editar">✏️</a>
+              <a href="{% url 'eliminar-computadora' computadora.pk %}" class="eliminar" title="Eliminar">🗑️</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="no-data">No hay computadoras registradas.</p>
+  {% endif %}
+</div>
+{% endblock %}

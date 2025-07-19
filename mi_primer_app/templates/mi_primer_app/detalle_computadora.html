@@ -1,0 +1,72 @@
+{% extends "padre.html" %}
+
+{% block contenido %}
+<style>
+  .detalle-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+  }
+
+  .detalle-container h1 {
+    text-align: center;
+    color: #2a4365;
+    margin-bottom: 30px;
+  }
+
+  .detalle-item {
+    margin-bottom: 15px;
+  }
+
+  .detalle-item strong {
+    color: #444;
+    display: inline-block;
+    width: 120px;
+  }
+
+  .btn-volver {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 24px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background 0.3s;
+    text-align: center;
+  }
+
+  .btn-volver:hover {
+    background-color: #e65c00;
+  }
+
+  .btn-container {
+    text-align: center;
+  }
+</style>
+
+<div class="detalle-container">
+  <h1>Detalle de la Computadora</h1>
+
+  <div class="detalle-item">
+    <strong>Marca:</strong> {{ computadora.marca }}
+  </div>
+  <div class="detalle-item">
+    <strong>Modelo:</strong> {{ computadora.modelo }}
+  </div>
+  <div class="detalle-item">
+    <strong>Descripción:</strong> {{ computadora.descripcion }}
+  </div>
+
+  <div class="btn-container">
+    <a href="{% url 'computadoras' %}" class="btn-volver">Volver</a>
+  </div>
+</div>
+{% endblock %}

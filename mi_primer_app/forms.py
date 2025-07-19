@@ -1,4 +1,5 @@
 from django import forms
+from .models import Computadora
 
 class cursoForm(forms.Form):
     nombre = forms.CharField()
@@ -29,3 +30,10 @@ class FamiliarForm(forms.Form):
     edad = forms.IntegerField(min_value=0, label='Edad')
     fecha_nacimiento = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), label='Fecha de Nacimiento')
     parentesco = forms.CharField(max_length=50, label='Parentesco')
+
+class ComputadoraForm(forms.ModelForm):
+   class Meta:
+       model = Computadora
+       fields = ['marca', 'modelo', 'descripcion']
+
+       
