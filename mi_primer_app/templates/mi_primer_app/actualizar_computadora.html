@@ -73,7 +73,7 @@
   }
 </style>
 
-<div class="editar-computadora-container">
+<div class="editar-computadora-container" id="form-container">
   <h2>Editar Computadora</h2>
 
   <form method="POST">
@@ -92,4 +92,13 @@
     </div>
   </form>
 </div>
+
+<script>
+  window.addEventListener('load', () => {
+    const formContainer = document.getElementById('form-container');
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
 {% endblock %}

@@ -101,42 +101,45 @@
   }
 </style>
 
-<h2>Profesores</h2>
+<div id="profesores-section">
 
-{% if mensaje_exito %}
-  <div class="mensaje-exito">
-    {{ mensaje_exito }}
-  </div>
-{% endif %}
+  <h2>Profesores</h2>
 
-<div class="btn-section">
-  <a href="{% url 'crear_profesor' %}" class="btn btn-crear">Crear Profesor</a>
-  <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
-</div>
-
-<div class="tabla-contenedor">
-  {% if profesores %}
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre y Apellido</th>
-          <th>Email</th>
-          <th>Curso</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for profesor in profesores %}
-          <tr>
-            <td>{{ profesor.nombre }} {{ profesor.apellido }}</td>
-            <td>{{ profesor.email }}</td>
-            <td>{{ profesor.curso }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <div class="no-registros">No hay profesores registrados.</div>
+  {% if mensaje_exito %}
+    <div class="mensaje-exito">
+      {{ mensaje_exito }}
+    </div>
   {% endif %}
-</div>
 
+  <div class="btn-section">
+    <a href="{% url 'crear_profesor' %}" class="btn btn-crear">Crear Profesor</a>
+    <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
+  </div>
+
+  <div class="tabla-contenedor">
+    {% if profesores %}
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre y Apellido</th>
+            <th>Email</th>
+            <th>Curso</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for profesor in profesores %}
+            <tr>
+              <td>{{ profesor.nombre }} {{ profesor.apellido }}</td>
+              <td>{{ profesor.email }}</td>
+              <td>{{ profesor.curso }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="no-registros">No hay profesores registrados.</div>
+    {% endif %}
+  </div>
+
+</div>
 {% endblock %}

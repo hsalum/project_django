@@ -114,7 +114,7 @@
   <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
 </div>
 
-<div class="tabla-contenedor">
+<div class="tabla-contenedor" id="tabla-familiares">
   {% if familiares %}
     <table>
       <thead>
@@ -140,5 +140,14 @@
     <div class="no-registros">No hay familiares registrados.</div>
   {% endif %}
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tablaFamiliares = document.getElementById("tabla-familiares");
+    if (tablaFamiliares) {
+      tablaFamiliares.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
 
 {% endblock %}

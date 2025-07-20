@@ -49,32 +49,65 @@
     box-sizing: border-box;
   }
 
-  .form-container button {
-    margin-top: 15px;
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .button-group button,
+  .button-group a {
     padding: 12px 28px;
-    background: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 6px;
     font-size: 1.1rem;
-    cursor: pointer;
     font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
     transition: background 0.2s;
   }
 
-  .form-container button:hover {
+  .button-group button {
+    background: #ff6600;
+    color: white;
+  }
+
+  .button-group button:hover {
     background: #e65c00;
+  }
+
+  .button-group a {
+    background: #ccc;
+    color: #333;
+  }
+
+  .button-group a:hover {
+    background: #bbb;
   }
 </style>
 
 <h2>Crear {{ entidad }}</h2>
 
-<div class="form-container">
+<div class="form-container" id="form-crear-familiar">
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Crear</button>
+    
+    <div class="button-group">
+      <button type="submit">Crear</button>
+      <a href="/familiares/">Atrás</a>
+    </div>
   </form>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const formContainer = document.getElementById("form-crear-familiar");
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
 
 {% endblock %}

@@ -59,21 +59,41 @@
     box-sizing: border-box;
   }
 
-  .form-container button {
-    margin-top: 10px;
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .button-group button,
+  .button-group a {
     padding: 10px 26px;
-    background: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 6px;
     font-size: 1.1rem;
-    cursor: pointer;
     font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
     transition: background 0.2s;
   }
 
-  .form-container button:hover {
+  .button-group button {
+    background: #ff6600;
+    color: white;
+  }
+
+  .button-group button:hover {
     background: #e65c00;
+  }
+
+  .button-group a {
+    background: #ccc;
+    color: #333;
+  }
+
+  .button-group a:hover {
+    background: #bbb;
   }
 </style>
 
@@ -85,39 +105,25 @@
 
 <h2>Crear Estudiante</h2>
 
-<div class="form-container">
+<div class="form-container" id="crear-estudiante">
   <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Guardar</button>
+
+      <div class="button-group">
+        <button type="submit">Guardar</button>
+        <a href="/estudiantes/">Atrás</a>
+      </div>
   </form>
 </div>
 
-{% endblock %}
-
-
-{%comment%}
-
-{% extends "padre.html" %}
-
-{% block title %} Crear Estudiante {% endblock %}
-
-{% block contenido %}
-
-{% if mensaje_exito %}
-  <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
-    {{ mensaje_exito }}
-  </div>
-{% endif %}
-
-<h2>Crear Estudiante</h2>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const crearEstudiante = document.getElementById("crear-estudiante");
+    if (crearEstudiante) {
+      crearEstudiante.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
 
 {% endblock %}
-
-{% endcomment %}

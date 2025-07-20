@@ -114,7 +114,7 @@
   <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
 </div>
 
-<div class="tabla-contenedor">
+<div class="tabla-contenedor" id="tabla-estudiantes">
   {% if estudiantes %}
     <table>
       <thead>
@@ -141,38 +141,13 @@
   {% endif %}
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tablaEstudiantes = document.getElementById("tabla-estudiantes");
+    if (tablaEstudiantes) {
+      tablaEstudiantes.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
+
 {% endblock %}
-
-
-{%comment%}
-
-{% extends 'padre.html' %}
-
-{% block title %}Estudiantes{% endblock %}
-
-{% block contenido %}
-  <h2 style="color:#2a4365; margin-bottom:20px;">Estudiantes</h2>
-  {% if mensaje_exito %}
-    <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
-      {{ mensaje_exito }}
-    </div>
-  {% endif %}
-  <div style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
-    <a href="{% url 'crear_estudiante' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Estudiante</a>
-    <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
-  </div>
-  <ul style="list-style:none; padding:0; max-width:600px; margin:auto;">
-    {% for estudiante in estudiantes %}
-      <li style="background:#edf2f7; margin-bottom:15px; padding:15px 20px; border-radius:8px; text-align:left;">
-        <strong>{{ estudiante.nombre }} {{ estudiante.apellido }}</strong><br>
-        Email: {{ estudiante.email }}<br>
-        Edad: {{ estudiante.edad }}<br>
-        Fecha de inscripción: {{ estudiante.fecha_inscripcion }}
-      </li>
-    {% empty %}
-      <li>No hay estudiantes registrados.</li>
-    {% endfor %}
-  </ul>
-{% endblock %}
-
-{% endcomment %}

@@ -52,7 +52,7 @@
   }
 </style>
 
-<div class="detalle-container">
+<div class="detalle-container" id="detalle-container">
   <h1>Detalle de la Computadora</h1>
 
   <div class="detalle-item">
@@ -69,4 +69,13 @@
     <a href="{% url 'computadoras' %}" class="btn-volver">Volver</a>
   </div>
 </div>
+
+<script>
+  window.addEventListener('load', () => {
+    const container = document.getElementById('detalle-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
 {% endblock %}

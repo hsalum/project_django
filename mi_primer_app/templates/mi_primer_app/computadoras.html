@@ -22,7 +22,7 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    table-layout: fixed; /* Para distribuir mejor el ancho */
+    table-layout: fixed;
   }
 
   thead {
@@ -32,22 +32,22 @@
   th, td {
     padding: 12px 16px;
     border-bottom: 1px solid #ddd;
-    vertical-align: top; /* Texto arriba */
-    word-break: break-word; /* Rompe texto largo */
+    vertical-align: top;
+    word-break: break-word;
   }
 
   th.modelo, td.modelo {
-    width: 20%; /* Ancho fijo para modelo */
+    width: 20%;
   }
 
   th.descripcion, td.descripcion {
-    width: 40%; /* Ancho fijo para descripción */
+    width: 40%;
   }
 
   td.acciones {
-    width: 20%; /* Espacio para botones */
+    width: 20%;
     padding-left: 10px;
-    white-space: nowrap; /* Evita que botones se corten */
+    white-space: nowrap;
   }
 
   tr:hover {
@@ -72,7 +72,7 @@
   }
 
   .acciones a.ver {
-    background-color: #3182ce; /* azul */
+    background-color: #3182ce;
   }
 
   .acciones a.ver:hover {
@@ -80,7 +80,7 @@
   }
 
   .acciones a.editar {
-    background-color: #f6ad55; /* naranja claro */
+    background-color: #f6ad55;
     color: #222;
   }
 
@@ -90,14 +90,13 @@
   }
 
   .acciones a.eliminar {
-    background-color: #e53e3e; /* rojo */
+    background-color: #e53e3e;
   }
 
   .acciones a.eliminar:hover {
     background-color: #c53030;
   }
 
-  /* Botones arriba */
   .top-buttons {
     max-width: 1000px;
     margin: 30px auto 10px;
@@ -140,7 +139,7 @@
   <a href="{% url 'inicio' %}" class="inicio">Inicio</a>
 </div>
 
-<div class="tabla-container">
+<div class="tabla-container" id="tabla-computadoras">
   <h2>Lista de Computadoras</h2>
 
   {% if computadoras %}
@@ -172,4 +171,13 @@
     <p class="no-data">No hay computadoras registradas.</p>
   {% endif %}
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tabla = document.getElementById("tabla-computadoras");
+    if(tabla) {
+      tabla.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
 {% endblock %}

@@ -49,50 +49,65 @@
     box-sizing: border-box;
   }
 
-  .form-container button {
-    margin-top: 10px;
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .button-group button,
+  .button-group a {
     padding: 10px 26px;
-    background: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 6px;
     font-size: 1.1rem;
-    cursor: pointer;
     font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
     transition: background 0.2s;
   }
 
-  .form-container button:hover {
+  .button-group button {
+    background: #ff6600;
+    color: white;
+  }
+
+  .button-group button:hover {
     background: #e65c00;
+  }
+
+  .button-group a {
+    background: #ccc;
+    color: #333;
+  }
+
+  .button-group a:hover {
+    background: #bbb;
   }
 </style>
 
 <h2>Crear Profesor</h2>
 
-<div class="form-container">
+<div class="form-container" id="crear-profesor">
   <form method="POST">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Guardar</button>
+
+      <div class="button-group">
+        <button type="submit">Guardar</button>
+        <a href="/profesores/">Atrás</a>
+      </div>
   </form>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const formContainer = document.getElementById("crear-profesor");
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
+
 {% endblock %}
-
-
-{%comment%}
-
-{% extends "padre.html" %}
-
-{% block title %}Crear Profesor{% endblock %}
-
-{% block contenido %}
-<h2>Crear Profesor</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-</form>
-{% endblock %}
-
-{% endcomment %}
