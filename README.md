@@ -60,3 +60,7 @@ Este proyecto es una aplicacion web desarrollada con Django que permite gestiona
 
 6. Acceder a `http://localhost:8000`
 
+
+## URL VIDEO 
+- YOUTUBE: https://www.youtube.com/watch?v=PQENjBNHjRg
+- DIRVE: https://drive.google.com/drive/folders/1ii6_BjaIKa9VUdppzM-z1OQRKl7a2jWD
