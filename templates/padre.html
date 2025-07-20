@@ -39,6 +39,10 @@
                     </div>
                     {% endif %}
                 </div>
+                     {% if user.avatar and user.avatar.imagen %}
+                     <img src="{{ user.avatar.imagen.url }}" alt="Avatar de {{ user.username }}" width="50"
+                     style="border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.2); margin-left: 15px;">
+{% endif %}
 
                 <!-- Menú de navegación -->
                 <button class="navbar-toggler navbar-toggler-right" type="button" 
@@ -55,6 +59,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'profesores' %}">Profesores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'estudiantes' %}">Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'familiares' %}">Familiares</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'computadoras' %}">Recomendaciones</a></li>
 
                         {% if user.is_authenticated %}
                         <li class="nav-item">

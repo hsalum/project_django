@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 from .models import Familia, Curso, Estudiante, Profesor, Computadora
@@ -15,6 +16,7 @@ def profesores(request):
     mensaje_exito = request.session.pop('mensaje_exito', None)
     return render(request, 'mi_primer_app/profesores.html', {'profesores': profesores, 'mensaje_exito': mensaje_exito})
 
+@login_required
 def crear_profesor(request):
     if request.method == 'POST':
         form = ProfesorForm(request.POST)
@@ -43,6 +45,7 @@ def saludo(request):
 def saludo_con_template(request):
     return render(request, 'mi_primer_app/saludo.html')
 
+@login_required
 def crear_familiar(request):
     if request.method == 'POST':
         form = FamiliarForm(request.POST)
@@ -61,6 +64,7 @@ def crear_familiar(request):
         form = FamiliarForm()
     return render(request, 'mi_primer_app/crear_familiar.html', {'form': form})
 
+@login_required
 def crear_curso(request):
     if request.method == 'POST':
         form = cursoForm(request.POST)
@@ -79,6 +83,7 @@ def crear_curso(request):
         form = cursoForm()
     return render(request, 'mi_primer_app/crear_curso.html', {'form': form})
 
+@login_required
 def crear_estudiante(request):
     if request.method == 'POST':
         form = EstudianteForms(request.POST)
@@ -128,20 +133,22 @@ class ComputadoraDetailView(DetailView):
     template_name = 'mi_primer_app/detalle_computadora.html'
     context_object_name = 'computadora'
     
-    
-class ComputadoraCreateView(CreateView):
+
+class ComputadoraCreateView(LoginRequiredMixin, CreateView):
     model = Computadora
     form_class = ComputadoraForm
     template_name = 'mi_primer_app/crear_computadora.html'
-    success_url = reverse_lazy('computadoras') 
+    success_url = reverse_lazy('computadoras')
 
-class ComputadoraUpdateView(UpdateView): 
+
+class ComputadoraUpdateView(LoginRequiredMixin, UpdateView): 
     model = Computadora
     form_class = ComputadoraForm
     template_name = 'mi_primer_app/actualizar_computadora.html'
     success_url = reverse_lazy('computadoras')
 
-class ComputadoraDeleteView(DeleteView):
+
+class ComputadoraDeleteView(LoginRequiredMixin, DeleteView):
     model = Computadora
     template_name = 'mi_primer_app/eliminar_computadora.html'
     success_url = reverse_lazy('computadoras')
