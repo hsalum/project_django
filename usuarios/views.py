@@ -19,7 +19,7 @@ class UserRegisterView(CreateView):
     model = User
     form_class = registerForm
     template_name = 'usuarios/register.html'  
-    success_url = reverse_lazy('login')  
+    success_url = reverse_lazy('inicio')  
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -67,7 +67,7 @@ class ProfileUpdateView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         user_form = ProfileUpdateForm(instance=request.user)
-        # Obtenemos o creamos el avatar del usuario
+   
         avatar, _ = Avatar.objects.get_or_create(user=request.user)
         avatar_form = AvatarForm(instance=avatar)
         password_form = PasswordChangeForm(request.user)
@@ -79,23 +79,23 @@ class ProfileUpdateView(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        # Inicializamos formularios con la data enviada.
+        
         user_form = ProfileUpdateForm(request.POST, instance=request.user)
         avatar, _ = Avatar.objects.get_or_create(user=request.user)
         avatar_form = AvatarForm(request.POST, request.FILES, instance=avatar)
         password_form = PasswordChangeForm(request.user, request.POST)
 
         if "update_profile" in request.POST:
-            # Se envió el formulario para actualizar datos y avatar.
+            
             if user_form.is_valid() and avatar_form.is_valid():
                 user_form.save()
                 avatar_form.save()
                 return redirect(self.success_url)
         elif "change_password" in request.POST:
-            # Se envió el formulario para cambiar contraseña.
+            
             if password_form.is_valid():
                 user = password_form.save()
-                # Importante: actualizar la sesión para que el usuario no se desconecte.
+                
                 update_session_auth_hash(request, user)
                 return redirect(self.success_url)
 
