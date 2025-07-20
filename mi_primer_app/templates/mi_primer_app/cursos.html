@@ -22,13 +22,6 @@
     font-weight: 500;
   }
 
-  #cursos-section {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 50px 0 40px;
-  }
-
   .btn {
     padding: 12px 26px;
     border-radius: 6px;
@@ -39,7 +32,7 @@
   }
 
   .btn-crear {
-    background: #ff6600; /* Naranja más vibrante */
+    background: #ff6600;
     color: white;
   }
 
@@ -54,6 +47,13 @@
 
   .btn-inicio:hover {
     background: #2d3748;
+  }
+
+  #cursos-section {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 50px 0 40px;
   }
 
   form {
@@ -80,7 +80,7 @@
   .cursos-listado {
     max-width: 600px;
     margin: 30px auto;
-    background: rgba(255, 255, 255, 0.85); /* blanco translúcido */
+    background: rgba(255, 255, 255, 0.85);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -108,12 +108,7 @@
   </div>
 {% endif %}
 
-<div id="cursos-section">
-  <a href="{% url 'crear_curso' %}" class="btn btn-crear">Crear Curso</a>
-  <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
-</div>
-
-<h2>Buscar Curso</h2>
+<h2 id="buscar-curso">Buscar Curso</h2>
 
 <form method="GET" action="{% url 'buscar_cursos' %}">
     <input type="text" name="nombre" placeholder="Nombre del curso" value="{{ nombre }}" />
@@ -132,48 +127,18 @@
   </ul>
 </div>
 
-{% endblock %}
-
-
-
-{%comment%}
-
-### CODIGO VIEJO
-{% extends "padre.html" %}
-
-{% block title %} Cursos {% endblock %}
-
-{% block contenido %}
-
-{% if mensaje_exito %}
-  <div style="background:#c6f6d5; color:#22543d; padding:12px 20px; border-radius:6px; margin-bottom:20px; font-weight:500;">
-    {{ mensaje_exito }}
-  </div>
-{% endif %}
-
-<div id="cursos-section" style="display:flex; gap:15px; justify-content:center; margin-bottom:25px;">
-  <a href="{% url 'crear_curso' %}" style="background:#3182ce; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Crear Curso</a>
-  <a href="{% url 'inicio' %}" style="background:#4a5568; color:white; padding:10px 24px; border-radius:5px; text-decoration:none; font-size:1rem; transition:background 0.2s;">Inicio</a>
+<div id="cursos-section">
+  <a href="{% url 'crear_curso' %}" class="btn btn-crear">Crear Curso</a>
+  <a href="{% url 'inicio' %}" class="btn btn-inicio">Inicio</a>
 </div>
 
-<h2>Buscar Curso</h2>
-
-<form method="GET" action="{% url 'buscar_cursos' %}">
-    <input type="text" name="nombre" placeholder="Nombre del curso" value="{{ nombre }}" />
-    <button type="submit">Buscar</button>
-</form>
-
-<h2>Cursos:</h2>
-
-<ul>
-    {% for curso in cursos %}
-        <li>{{ curso.nombre }}</li>
-    {% empty %}
-        <li>No se encontraron cursos.</li>
-    {% endfor %}
-
-</ul>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const buscarCurso = document.getElementById('buscar-curso');
+    if (buscarCurso) {
+      buscarCurso.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
 
 {% endblock %}
-{% endcomment %}
-
