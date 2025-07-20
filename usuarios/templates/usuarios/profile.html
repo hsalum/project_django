@@ -1,13 +1,107 @@
 {% extends "padre.html" %}
+
 {% block contenido %}
+<style>
+  body {
+    background: #f7fafc;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
 
-<h2> Personal </h2>
-{% if user.avatar %}
-<img style="width: 200px; height 200px" src="{{ user.avatar.imagen.url}}" alt="Avatar">
-{% endif %}
-<p>Nombre de Usuario: {{ user.username }}</p>
-<p>Primer Nombre: {{user.first_name}}</p>
-<p>Apellido: {{user.last_name}}</p>
+  .perfil-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
 
+  .perfil-container h2 {
+    color: #2a4365;
+    margin-bottom: 20px;
+  }
 
+  .avatar-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+
+  .perfil-info p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #2d3748;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  .btn-editar {
+    background: #ff6600;
+    color: white;
+  }
+
+  .btn-editar:hover {
+    background: #e65c00;
+  }
+
+  .btn-atras {
+    background: #4a5568;
+    color: white;
+  }
+
+  .btn-atras:hover {
+    background: #2d3748;
+  }
+</style>
+
+<div id="perfil-section" class="perfil-container">
+  <h2>Mi Perfil</h2>
+
+  {% if user.avatar %}
+    <img class="avatar-img" src="{{ user.avatar.imagen.url }}" alt="Avatar">
+  {% endif %}
+
+  <div class="perfil-info">
+    <p><strong>Nombre de Usuario:</strong> {{ user.username }}</p>
+    <p><strong>Primer Nombre:</strong> {{ user.first_name }}</p>
+    <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+  </div>
+
+  <div class="btn-group">
+    <a href="{% url 'edit_profile' %}" class="btn btn-editar">Editar</a>
+    <a href="{% url 'inicio' %}" class="btn btn-atras">Atrás</a>
+  </div>
+</div>
+
+<!-- 🔽 Scroll automático -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.getElementById('perfil-section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+</script>
 {% endblock %}

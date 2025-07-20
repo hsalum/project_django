@@ -1,35 +1,176 @@
 {% extends "padre.html" %}
-{% block contenido %}
 
-<h2>Editar Perfil</h2>
+{% block contenido %}
+<style>
+  body {
+    background: #f7fafc;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .edit-profile-container {
+    max-width: 700px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .edit-profile-container h2 {
+    text-align: center;
+    color: #2a4365;
+    margin-bottom: 30px;
+  }
+
+  fieldset {
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  legend {
+    font-weight: bold;
+    color: #2d3748;
+    padding: 0 10px;
+  }
+
+  form p {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #2d3748;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .avatar-preview {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .avatar-preview img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  }
+
+  button[type="submit"] {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #e65c00;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 40px 0;
+  }
+
+  .btn-atras {
+    display: inline-block;
+    margin: 30px auto 0;
+    background: #4a5568;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+    text-align: center;
+  }
+
+  .btn-atras:hover {
+    background: #2d3748;
+  }
+
+  .btn-wrapper {
+    text-align: center;
+  }
+</style>
+
+<div class="edit-profile-container">
+
+  <h2 id="titulo-editar-perfil">Editar Perfil</h2>
 
   <!-- Formulario para actualizar datos y avatar -->
   <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset>
-          <legend>Datos de Usuario</legend>
-          {{ user_form.as_p }}
-      </fieldset>
-      <fieldset>
-          <legend>Avatar</legend>
-          {% if user.avatar and user.avatar.imagen %}
-              <img src="{{ user.avatar.imagen.url }}" alt="Avatar de {{ user.username }}" width="100">
-          {% endif %}
-          {{ avatar_form.as_p }}
-      </fieldset>
-      <button type="submit" name="update_profile">Actualizar Perfil y Avatar</button>
+    {% csrf_token %}
+    <fieldset>
+      <legend>Datos de Usuario</legend>
+      {{ user_form.as_p }}
+    </fieldset>
+
+    <fieldset>
+      <legend>Avatar</legend>
+      {% if user.avatar and user.avatar.imagen %}
+        <div class="avatar-preview">
+          <img src="{{ user.avatar.imagen.url }}" alt="Avatar de {{ user.username }}">
+        </div>
+      {% endif %}
+      {{ avatar_form.as_p }}
+    </fieldset>
+
+    <button type="submit" name="update_profile">Actualizar Perfil y Avatar</button>
   </form>
 
   <hr>
 
   <!-- Formulario para cambiar contraseña -->
   <form method="post">
-      {% csrf_token %}
-      <fieldset>
-          <legend>Cambiar Contraseña</legend>
-          {{ password_form.as_p }}
-      </fieldset>
-      <button type="submit" name="change_password">Cambiar Contraseña</button>
+    {% csrf_token %}
+    <fieldset>
+      <legend>Cambiar Contraseña</legend>
+      {{ password_form.as_p }}
+    </fieldset>
+    <button type="submit" name="change_password">Cambiar Contraseña</button>
   </form>
 
+  <!-- Botón Atrás -->
+  <div class="btn-wrapper">
+    <a href="{% url 'profile' %}" class="btn-atras">Atrás</a>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const titulo = document.getElementById("titulo-editar-perfil");
+    if (titulo) {
+      titulo.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => {
+        window.scrollBy(0, -80);
+      }, 400);
+    }
+  });
+</script>
+
 {% endblock %}
+
